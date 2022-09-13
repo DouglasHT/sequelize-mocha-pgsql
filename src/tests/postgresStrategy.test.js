@@ -18,7 +18,14 @@ describe('Postgres Strategy', () => {
     })
 
     it('cadastrar', async () =>{
-        const result = await context.create(MOCK_HEROI_CADASTRAR)
+        const result = await context.create(MOCK_HEROI_CADASTRAR)    
+        delete result.id    
+        assert.deepEqual(result, MOCK_HEROI_CADASTRAR)
+    })
+
+    it('listar', async () =>{
+        // const [posicao1, posicao2, posicao3] = ['esse e o 1', 'esse e o 2', 'esse e o 3']
+        const [result] = await context.read({nome: MOCK_HEROI_CADASTRAR.nome})
         delete result.id        
         assert.deepEqual(result, MOCK_HEROI_CADASTRAR)
     })
