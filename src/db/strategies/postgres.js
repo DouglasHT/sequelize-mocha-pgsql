@@ -46,13 +46,17 @@ class Postgres extends IDb {
   }
 
   async create(item) {
-    const { dataValues }  = await this._herois.create(item, {raw: true});
+    const { dataValues }  = await this._herois.create(item);
     return dataValues;
   }
 
 
   read(item = {}) {
     return this._herois.findAll({where: item, raw: true});
+  }
+
+  update(id, item){
+    return  this._herois.update(item, { where: {id: id}} );
   }
 
   async connect(){
